@@ -61,8 +61,8 @@ class NoUnloadListeners extends Audit {
     const tableItems = unloadListeners.map(listener => {
       const url = scriptIdToUrl.get(listener.scriptId);
 
-      // If we can't find a url, still show something so the user can still
-      // manually look for where an `unload` handler is being created.
+      // If we can't find a url, still show something so the user can manually
+      // look for where an `unload` handler is being created.
       if (!url) {
         return {
           source: {
