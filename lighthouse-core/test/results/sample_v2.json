@@ -1855,6 +1855,33 @@
         ]
       }
     },
+    "no-unload-listeners": {
+      "id": "no-unload-listeners",
+      "title": "Listens for the `unload` event",
+      "description": "The `unload` event does not fire reliably and listening for it can prevent browser optimizations like the back/forward cache. Consider using the `pagehide` or `visibilitychange` events instead. [Learn More](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#legacy-lifecycle-apis-to-avoid)",
+      "score": 0,
+      "scoreDisplayMode": "binary",
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "itemType": "url",
+            "text": "URL"
+          },
+          {
+            "key": "line",
+            "itemType": "text",
+            "text": "Location"
+          }
+        ],
+        "items": [
+          {
+            "line": "line: 386"
+          }
+        ]
+      }
+    },
     "pwa-cross-browser": {
       "id": "pwa-cross-browser",
       "title": "Site works cross-browser",
@@ -4446,6 +4473,11 @@
           "group": "best-practices-browser-compat"
         },
         {
+          "id": "no-unload-listeners",
+          "weight": 1,
+          "group": "best-practices-general"
+        },
+        {
           "id": "appcache-manifest",
           "weight": 1,
           "group": "best-practices-general"
@@ -4467,7 +4499,7 @@
         }
       ],
       "id": "best-practices",
-      "score": 0.08
+      "score": 0.07
     },
     "seo": {
       "title": "SEO",
@@ -5259,6 +5291,12 @@
       {
         "startTime": 0,
         "name": "lh:audit:long-tasks",
+        "duration": 100,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 0,
+        "name": "lh:audit:no-unload-listeners",
         "duration": 100,
         "entryType": "measure"
       },
@@ -6099,6 +6137,7 @@
         "audits[network-rtt].details.headings[0].text",
         "audits[network-server-latency].details.headings[0].text",
         "audits[long-tasks].details.headings[0].text",
+        "audits[no-unload-listeners].details.headings[0].text",
         "audits[uses-long-cache-ttl].details.headings[0].text",
         "audits[total-byte-weight].details.headings[0].text",
         "audits[render-blocking-resources].details.headings[0].label",
@@ -6505,6 +6544,19 @@
       ],
       "lighthouse-core/lib/i18n/i18n.js | columnDuration": [
         "audits[long-tasks].details.headings[2].text"
+      ],
+      "lighthouse-core/audits/no-unload-listeners.js | failureTitle": [
+        "audits[no-unload-listeners].title"
+      ],
+      "lighthouse-core/audits/no-unload-listeners.js | description": [
+        "audits[no-unload-listeners].description"
+      ],
+      "lighthouse-core/lib/i18n/i18n.js | columnLocation": [
+        "audits[no-unload-listeners].details.headings[1].text",
+        "audits[geolocation-on-start].details.headings[1].text",
+        "audits[no-document-write].details.headings[1].text",
+        "audits[notification-on-start].details.headings[1].text",
+        "audits[uses-passive-event-listeners].details.headings[1].text"
       ],
       "lighthouse-core/audits/manual/pwa-cross-browser.js | title": [
         "audits[pwa-cross-browser].title"
@@ -6989,12 +7041,6 @@
       ],
       "lighthouse-core/audits/dobetterweb/geolocation-on-start.js | description": [
         "audits[geolocation-on-start].description"
-      ],
-      "lighthouse-core/lib/i18n/i18n.js | columnLocation": [
-        "audits[geolocation-on-start].details.headings[1].text",
-        "audits[no-document-write].details.headings[1].text",
-        "audits[notification-on-start].details.headings[1].text",
-        "audits[uses-passive-event-listeners].details.headings[1].text"
       ],
       "lighthouse-core/audits/dobetterweb/no-document-write.js | failureTitle": [
         "audits[no-document-write].title"

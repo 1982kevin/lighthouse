@@ -2266,5 +2266,12 @@
   "InspectorIssues": {
     "blockedByResponse": [],
     "mixedContent": []
-  }
+  },
+  "UnloadListeners": [
+    {
+      "type": "unload",
+      "scriptId": "23",
+      "lineNumber": 386
+    }
+  ]
 }

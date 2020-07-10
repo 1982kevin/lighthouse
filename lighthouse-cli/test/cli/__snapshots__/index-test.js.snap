@@ -160,6 +160,9 @@ Object {
       "path": "long-tasks",
     },
     Object {
+      "path": "no-unload-listeners",
+    },
+    Object {
       "path": "manual/pwa-cross-browser",
     },
     Object {
@@ -739,6 +742,11 @@ Object {
         Object {
           "group": "best-practices-browser-compat",
           "id": "charset",
+          "weight": 1,
+        },
+        Object {
+          "group": "best-practices-general",
+          "id": "no-unload-listeners",
           "weight": 1,
         },
         Object {
@@ -1351,6 +1359,9 @@ Object {
         },
         Object {
           "path": "source-maps",
+        },
+        Object {
+          "path": "unload-listeners",
         },
       ],
       "loadFailureMode": "fatal",
