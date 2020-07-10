@@ -5,9 +5,16 @@
  */
 'use strict';
 
+/**
+ * @fileoverview
+ * A gatherer to collect information about the event listeners registered on the
+ * global object. For now, the scope is narrowed to events that occur on and
+ * around page unload, but this can be expanded in the future.
+ */
+
 const Gatherer = require('./gatherer.js');
 
-class UnloadListeners extends Gatherer {
+class GlobalListeners extends Gatherer {
   /**
    * @param {LH.Crdp.DOMDebugger.EventListener} listener
    * @return {listener is {type: 'pagehide'|'unload'|'visibilitychange'} & LH.Crdp.DOMDebugger.EventListener}
@@ -20,7 +27,7 @@ class UnloadListeners extends Gatherer {
 
   /**
    * @param {LH.Gatherer.PassContext} passContext
-   * @return {Promise<LH.Artifacts['UnloadListeners']>}
+   * @return {Promise<LH.Artifacts['GlobalListeners']>}
    */
   async afterPass(passContext) {
     const driver = passContext.driver;
@@ -34,10 +41,10 @@ class UnloadListeners extends Gatherer {
       throw new Error('Error fetching information about the global object');
     }
 
-    // And get all its unload-ish listeners.
+    // And get all its listeners of interest.
     const {listeners} = await driver.sendCommand('DOMDebugger.getEventListeners', {objectId});
     return listeners
-      .filter(UnloadListeners._filterForUnloadTypes)
+      .filter(GlobalListeners._filterForUnloadTypes)
       .map(listener => {
         const {type, scriptId, lineNumber, columnNumber} = listener;
         return {
@@ -50,4 +57,4 @@ class UnloadListeners extends Gatherer {
   }
 }
 
-module.exports = UnloadListeners;
+module.exports = GlobalListeners;

@@ -147,6 +147,7 @@ const defaultConfig = {
       'script-elements',
       'iframe-elements',
       'main-document-content',
+      'global-listeners',
       'dobetterweb/appcache',
       'dobetterweb/doctype',
       'dobetterweb/domstats',
@@ -162,7 +163,6 @@ const defaultConfig = {
       'trace-elements',
       'inspector-issues',
       'source-maps',
-      'unload-listeners',
     ],
   },
   {

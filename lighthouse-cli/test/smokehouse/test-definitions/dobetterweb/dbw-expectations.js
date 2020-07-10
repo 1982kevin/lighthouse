@@ -197,7 +197,7 @@ const expectations = [
           },
         },
       ],
-      UnloadListeners: [{
+      GlobalListeners: [{
         type: 'unload',
         scriptId: /^\d+$/,
         lineNumber: '>300',

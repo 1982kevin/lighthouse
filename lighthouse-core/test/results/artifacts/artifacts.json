@@ -2267,7 +2267,7 @@
     "blockedByResponse": [],
     "mixedContent": []
   },
-  "UnloadListeners": [
+  "GlobalListeners": [
     {
       "type": "unload",
       "scriptId": "23",

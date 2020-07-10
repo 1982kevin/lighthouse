@@ -29,7 +29,7 @@ class NoUnloadListeners extends Audit {
       title: str_(UIStrings.title),
       failureTitle: str_(UIStrings.failureTitle),
       description: str_(UIStrings.description),
-      requiredArtifacts: ['UnloadListeners', 'JsUsage'],
+      requiredArtifacts: ['GlobalListeners', 'JsUsage'],
     };
   }
 
@@ -38,7 +38,7 @@ class NoUnloadListeners extends Audit {
    * @return {LH.Audit.Product}
    */
   static audit(artifacts) {
-    const unloadListeners = artifacts.UnloadListeners.filter(l => l.type === 'unload');
+    const unloadListeners = artifacts.GlobalListeners.filter(l => l.type === 'unload');
     if (!unloadListeners.length) {
       return {
         score: 1,
@@ -50,14 +50,16 @@ class NoUnloadListeners extends Audit {
       {key: 'source', itemType: 'source-location', text: str_(i18n.UIStrings.columnURL)},
     ];
 
-    const jsUsageValues = Object.values(artifacts.JsUsage)
-      .reduce((acc, usage) => acc.concat(usage), []); // single-level arr.flat().
+    // Look up scriptId to script URL via the JsUsage artifact.
+    /** @type {Array<[string, string]>} */
+    const scriptIdToUrlEntries = Object.values(artifacts.JsUsage)
+      .reduce((acc, usage) => acc.concat(usage), []) // single-level arr.flat().
+      .map(usage => [usage.scriptId, usage.url]);
+    const scriptIdToUrl = new Map(scriptIdToUrlEntries);
 
     /** @type {Array<{source: LH.Audit.Details.SourceLocationValue}>} */
     const tableItems = unloadListeners.map(listener => {
-      // Look up scriptId to script URL via the JsUsage artifact.
-      const usageEntry = jsUsageValues.find(usage => usage.scriptId === listener.scriptId);
-      const url = usageEntry && usageEntry.url || '(unknown)';
+      const url = scriptIdToUrl.get(listener.scriptId) || '(unknown)';
 
       // line: `line: ${listener.lineNumber}`,
       return {
