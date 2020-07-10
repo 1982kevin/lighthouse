@@ -57,11 +57,21 @@ class NoUnloadListeners extends Audit {
       .map(usage => [usage.scriptId, usage.url]);
     const scriptIdToUrl = new Map(scriptIdToUrlEntries);
 
-    /** @type {Array<{source: LH.Audit.Details.SourceLocationValue}>} */
+    /** @type {Array<{source: LH.Audit.Details.ItemValue}>} */
     const tableItems = unloadListeners.map(listener => {
-      const url = scriptIdToUrl.get(listener.scriptId) || '(unknown)';
+      const url = scriptIdToUrl.get(listener.scriptId);
 
-      // line: `line: ${listener.lineNumber}`,
+      // If we can't find a url, still show something so the user can still
+      // manually look for where an `unload` handler is being created.
+      if (!url) {
+        return {
+          source: {
+            type: 'url',
+            value: '(unknown)',
+          },
+        };
+      }
+
       return {
         source: {
           type: 'source-location',
