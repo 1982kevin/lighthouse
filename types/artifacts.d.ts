@@ -144,6 +144,8 @@ declare global {
       TapTargets: Artifacts.TapTarget[];
       /** Elements associated with metrics (ie: Largest Contentful Paint element). */
       TraceElements: Artifacts.TraceElement[];
+      /** Information about the event handlers that were registered to listen for when the page is unloaded. */
+      UnloadListeners: Array<Artifacts.UnloadListener>;
     }
 
     module Artifacts {
@@ -672,6 +674,16 @@ declare global {
         observedLastVisualChangeTs: number;
         observedSpeedIndex: number;
         observedSpeedIndexTs: number;
+      }
+
+      /** Information on a listener for an event that happens on or around page unload. */
+      export interface UnloadListener {
+        /** Event listener type. */
+        type: 'pagehide'|'unload'|'visibilitychange';
+        /** The DevTools protocol script identifier. */
+        scriptId: string;
+        /** Line number in the script (0-based). */
+        lineNumber: number;
       }
     }
   }
