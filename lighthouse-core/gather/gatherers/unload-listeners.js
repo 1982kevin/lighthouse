@@ -39,11 +39,12 @@ class UnloadListeners extends Gatherer {
     return listeners
       .filter(UnloadListeners._filterForUnloadTypes)
       .map(listener => {
-        const {type, scriptId, lineNumber} = listener;
+        const {type, scriptId, lineNumber, columnNumber} = listener;
         return {
           type,
           scriptId,
           lineNumber,
+          columnNumber,
         };
       });
   }

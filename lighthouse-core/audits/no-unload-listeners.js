@@ -9,12 +9,12 @@ const Audit = require('./audit.js');
 const i18n = require('./../lib/i18n/i18n.js');
 
 const UIStrings = {
-  /** Descriptive title of a Lighthouse audit that checks if a web page has 'unload' event listeners and finds none.  */
+  /** Descriptive title of a Lighthouse audit that checks if a web page has 'unload' event listeners and finds none. */
   title: 'Avoids `unload` event listeners',
   /** Descriptive title of a Lighthouse audit that checks if a web page has 'unload' event listeners and finds that it is using them. */
   failureTitle: 'Listens for the `unload` event',
   /** Description of a Lighthouse audit that tells the user why pages should not use the 'unload' event. This is displayed after a user expands the section to see more. 'Learn More' becomes link text to additional documentation. */
-  description: 'The `unload` event does not fire reliably and listening for it can prevent browser optimizations like the back/forward cache. Consider using the `pagehide` or `visibilitychange` events instead. [Learn More](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#legacy-lifecycle-apis-to-avoid)',
+  description: 'The `unload` event does not fire reliably and listening for it can prevent browser optimizations like the back/forward cache. Consider using the `pagehide` or `visibilitychange` events instead. [Learn More](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#the-unload-event)',
 };
 
 const str_ = i18n.createMessageInstanceIdFn(__filename, UIStrings);
@@ -47,22 +47,27 @@ class NoUnloadListeners extends Audit {
 
     /** @type {LH.Audit.Details.Table['headings']} */
     const headings = [
-      {key: 'url', itemType: 'url', text: str_(i18n.UIStrings.columnURL)},
-      {key: 'line', itemType: 'text', text: str_(i18n.UIStrings.columnLocation)},
+      {key: 'source', itemType: 'source-location', text: str_(i18n.UIStrings.columnURL)},
     ];
 
     const jsUsageValues = Object.values(artifacts.JsUsage)
       .reduce((acc, usage) => acc.concat(usage), []); // single-level arr.flat().
 
-    /** @type {LH.Audit.Details.Table['items']} */
+    /** @type {Array<{source: LH.Audit.Details.SourceLocationValue}>} */
     const tableItems = unloadListeners.map(listener => {
       // Look up scriptId to script URL via the JsUsage artifact.
       const usageEntry = jsUsageValues.find(usage => usage.scriptId === listener.scriptId);
-      const url = usageEntry && usageEntry.url;
+      const url = usageEntry && usageEntry.url || '(unknown)';
 
+      // line: `line: ${listener.lineNumber}`,
       return {
-        url,
-        line: `line: ${listener.lineNumber}`,
+        source: {
+          type: 'source-location',
+          url,
+          urlProvider: 'network',
+          line: listener.lineNumber,
+          column: listener.columnNumber,
+        },
       };
     });
 

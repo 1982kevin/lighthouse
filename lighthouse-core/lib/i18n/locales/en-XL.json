@@ -960,7 +960,7 @@
     "message": "Ŝér̂v́êŕ B̂áĉḱêńd̂ Ĺât́êńĉíêś"
   },
   "lighthouse-core/audits/no-unload-listeners.js | description": {
-    "message": "T̂h́ê `unload` év̂én̂t́ d̂óêś n̂ót̂ f́îŕê ŕêĺîáb̂ĺŷ án̂d́ l̂íŝt́êńîńĝ f́ôŕ ît́ ĉán̂ ṕr̂év̂én̂t́ b̂ŕôẃŝér̂ óp̂t́îḿîźât́îón̂ś l̂ík̂é t̂h́ê b́âćk̂/f́ôŕŵár̂d́ ĉáĉh́ê. Ćôńŝíd̂ér̂ úŝín̂ǵ t̂h́ê `pagehide` ór̂ `visibilitychange` év̂én̂t́ŝ ín̂śt̂éâd́. [L̂éâŕn̂ Ḿôŕê](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#legacy-lifecycle-apis-to-avoid)"
+    "message": "T̂h́ê `unload` év̂én̂t́ d̂óêś n̂ót̂ f́îŕê ŕêĺîáb̂ĺŷ án̂d́ l̂íŝt́êńîńĝ f́ôŕ ît́ ĉán̂ ṕr̂év̂én̂t́ b̂ŕôẃŝér̂ óp̂t́îḿîźât́îón̂ś l̂ík̂é t̂h́ê b́âćk̂/f́ôŕŵár̂d́ ĉáĉh́ê. Ćôńŝíd̂ér̂ úŝín̂ǵ t̂h́ê `pagehide` ór̂ `visibilitychange` év̂én̂t́ŝ ín̂śt̂éâd́. [L̂éâŕn̂ Ḿôŕê](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#the-unload-event)"
   },
   "lighthouse-core/audits/no-unload-listeners.js | failureTitle": {
     "message": "L̂íŝt́êńŝ f́ôŕ t̂h́ê `unload` év̂én̂t́"

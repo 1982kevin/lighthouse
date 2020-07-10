@@ -201,6 +201,7 @@ const expectations = [
         type: 'unload',
         scriptId: /^\d+$/,
         lineNumber: '>300',
+        columnNumber: '>30',
       }],
     },
     lhr: {
@@ -422,8 +423,13 @@ const expectations = [
           score: 0,
           details: {
             items: [{
-              url: 'http://localhost:10200/dobetterweb/dbw_tester.html',
-              line: /^line: \d\d\d/,
+              source: {
+                type: 'source-location',
+                url: 'http://localhost:10200/dobetterweb/dbw_tester.html',
+                urlProvider: 'network',
+                line: '>300',
+                column: '>30',
+              },
             }],
           },
         },

@@ -1858,26 +1858,27 @@
     "no-unload-listeners": {
       "id": "no-unload-listeners",
       "title": "Listens for the `unload` event",
-      "description": "The `unload` event does not fire reliably and listening for it can prevent browser optimizations like the back/forward cache. Consider using the `pagehide` or `visibilitychange` events instead. [Learn More](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#legacy-lifecycle-apis-to-avoid)",
+      "description": "The `unload` event does not fire reliably and listening for it can prevent browser optimizations like the back/forward cache. Consider using the `pagehide` or `visibilitychange` events instead. [Learn More](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#the-unload-event)",
       "score": 0,
       "scoreDisplayMode": "binary",
       "details": {
         "type": "table",
         "headings": [
           {
-            "key": "url",
-            "itemType": "url",
+            "key": "source",
+            "itemType": "source-location",
             "text": "URL"
-          },
-          {
-            "key": "line",
-            "itemType": "text",
-            "text": "Location"
           }
         ],
         "items": [
           {
-            "line": "line: 386"
+            "source": {
+              "type": "source-location",
+              "url": "(unknown)",
+              "urlProvider": "network",
+              "line": 386,
+              "column": 36
+            }
           }
         ]
       }
@@ -6551,13 +6552,6 @@
       "lighthouse-core/audits/no-unload-listeners.js | description": [
         "audits[no-unload-listeners].description"
       ],
-      "lighthouse-core/lib/i18n/i18n.js | columnLocation": [
-        "audits[no-unload-listeners].details.headings[1].text",
-        "audits[geolocation-on-start].details.headings[1].text",
-        "audits[no-document-write].details.headings[1].text",
-        "audits[notification-on-start].details.headings[1].text",
-        "audits[uses-passive-event-listeners].details.headings[1].text"
-      ],
       "lighthouse-core/audits/manual/pwa-cross-browser.js | title": [
         "audits[pwa-cross-browser].title"
       ],
@@ -7041,6 +7035,12 @@
       ],
       "lighthouse-core/audits/dobetterweb/geolocation-on-start.js | description": [
         "audits[geolocation-on-start].description"
+      ],
+      "lighthouse-core/lib/i18n/i18n.js | columnLocation": [
+        "audits[geolocation-on-start].details.headings[1].text",
+        "audits[no-document-write].details.headings[1].text",
+        "audits[notification-on-start].details.headings[1].text",
+        "audits[uses-passive-event-listeners].details.headings[1].text"
       ],
       "lighthouse-core/audits/dobetterweb/no-document-write.js | failureTitle": [
         "audits[no-document-write].title"
