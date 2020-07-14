@@ -19,7 +19,7 @@ class GlobalListeners extends Gatherer {
    * @param {LH.Crdp.DOMDebugger.EventListener} listener
    * @return {listener is {type: 'pagehide'|'unload'|'visibilitychange'} & LH.Crdp.DOMDebugger.EventListener}
    */
-  static _filterForUnloadTypes(listener) {
+  static _filterForAllowlistedTypes(listener) {
     return listener.type === 'pagehide' ||
       listener.type === 'unload' ||
       listener.type === 'visibilitychange';
@@ -44,7 +44,7 @@ class GlobalListeners extends Gatherer {
     // And get all its listeners of interest.
     const {listeners} = await driver.sendCommand('DOMDebugger.getEventListeners', {objectId});
     return listeners
-      .filter(GlobalListeners._filterForUnloadTypes)
+      .filter(GlobalListeners._filterForAllowlistedTypes)
       .map(listener => {
         const {type, scriptId, lineNumber, columnNumber} = listener;
         return {

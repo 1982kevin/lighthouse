@@ -1857,8 +1857,8 @@
     },
     "no-unload-listeners": {
       "id": "no-unload-listeners",
-      "title": "Listens for the `unload` event",
-      "description": "The `unload` event does not fire reliably and listening for it can prevent browser optimizations like the back/forward cache. Consider using the `pagehide` or `visibilitychange` events instead. [Learn More](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#the-unload-event)",
+      "title": "Registers an `unload` listener",
+      "description": "The `unload` event does not fire reliably and listening for it can prevent browser optimizations like the Back-Forward Cache. Consider using the `pagehide` or `visibilitychange` events instead. [Learn More](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#the-unload-event)",
       "score": 0,
       "scoreDisplayMode": "binary",
       "details": {
